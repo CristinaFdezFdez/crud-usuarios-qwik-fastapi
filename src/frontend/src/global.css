@@ -1,0 +1,36 @@
+/**
+ * Tailwind CSS imports
+ * View the full documentation at https://tailwindcss.com
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base{
+    .title{
+        @apply w-20 h-4 m-2 bg-alanturing-800 rounded-md text-white;
+    }
+    td{
+        @apply text-center;
+    }
+    input{
+        @apply p-1 rounded-md focus:outline-none focus:border-alanturing-800 focus:border-2;
+    }
+    button{
+        @apply px-2 py-1 rounded-md text-white ;
+    }
+    .button{
+        @apply px-2 py-[7px] rounded-md text-white cursor-pointer;
+    }
+    i{
+        @apply ml-1;
+    }
+    .button-age{
+        @apply w-52 mt-4 mr-3 bg-alanturing-800;
+    }
+
+    .button-age-highlighted{
+        @apply w-52 mt-4 mr-3 bg-alanturing-400;
+    }
+}

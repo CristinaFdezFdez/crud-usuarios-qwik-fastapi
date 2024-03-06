@@ -1,0 +1,41 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123
+
+  backend:
+    build: ./backend
+    command: uvicorn main:app --host 0.0.0.0 --reload
+    volumes:
+      - ./backend:/code
+      - /code/__pycache__
+      - /code/.venv
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    command: npm run dev -- --host
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+
+# Definición del volumen para la persistencia de datos a nivel de proyecto
+volumes:
+  mongodb-data:
+
